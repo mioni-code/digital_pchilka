@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Світоглядний квіз — Цифрова Олена Пчілка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Навігація -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">Digital Pchilka 🐝</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">Головна</a>
+                <a class="nav-link" href="/archive">Архів творів</a>
+                <a class="nav-link active fw-bold" href="/mindset">Mindset Explorer</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основний вміст -->
+    <div class="container my-5" style="max-width: 850px;">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fs-6 mb-2">Модуль саморефлексії</span>
+            <h1 class="fw-bold">🧭 Світоглядний квіз: Культурні виміри</h1>
+            <p class="lead text-muted">
+                Дайте відповідь на 5 ситуаційних запитань, щоб дізнатися, який із трьох авторських культурно-просвітницьких типів, пов’язаних із діяльністю Олени Пчілки, є найближчим до вашого бачення.
+            </p>
+        </div>
+
+        {% if not result %}
+        <form method="POST" class="card shadow-sm p-4 p-md-5 border-0 rounded-4 mb-5">
+            
+            <!-- Ситуація 1 -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark">1. Уявіть, що ви отримали грант на культурний проєкт. На що ви спрямуєте ресурси насамперед?</h5>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q1" value="ethno" id="q1a" required>
+                    <label class="form-check-label" for="q1a">Оцифрування та систематизація старовинних народних візерунків, текстів і обрядів.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q1" value="publisher" id="q1b">
+                    <label class="form-check-label" for="q1b">Створення сучасного ілюстрованого журналу та освітнього додатка для дітей.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q1" value="activist" id="q1c">
+                    <label class="form-check-label" for="q1c">Заснування незалежного медіа для публічних дебатів про права людини та розвиток культури.</label>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Ситуація 2 -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark">2. Який виклик у сучасному суспільстві ви вважаєте найбільш критичним?</h5>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q2" value="ethno" id="q2a" required>
+                    <label class="form-check-label" for="q2a">Втрата локальної автентичності та занепад народних мистецьких традицій під тиском глобалізації.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q2" value="publisher" id="q2b">
+                    <label class="form-check-label" for="q2b">Брак якісного та естетичного україномовного контенту для дітей і підлітків.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q2" value="activist" id="q2c">
+                    <label class="form-check-label" for="q2c">Пасивність громадян та недостатній захист слів і прав у суспільному просторі.</label>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Ситуація 3 -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark">3. Організовуючи виставку або захід, на чому ви зробите головний акцент?</h5>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q3" value="ethno" id="q3a" required>
+                    <label class="form-check-label" for="q3a">На візуальній точності, детальному описі взірців народної майстерності та етнографічних деталях.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q3" value="publisher" id="q3b">
+                    <label class="form-check-label" for="q3b">На інтерактивності, залученні молоді, грі та доступності подачі матеріалу.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q3" value="activist" id="q3c">
+                    <label class="form-check-label" for="q3c">На дискусійній панелі, виступах спікерів та формулюванні чітких суспільних вимог.</label>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Ситуація 4 -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark">4. Що для вас є найвищою оцінкою вашої діяльності?</h5>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q4" value="ethno" id="q4a" required>
+                    <label class="form-check-label" for="q4a">Збереження унікальної культурної спадщини від забуття для науковців і нащадків.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q4" value="publisher" id="q4b">
+                    <label class="form-check-label" for="q4b">Сформований інтерес до читання та рідної культури у молодого покоління.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q4" value="activist" id="q4c">
+                    <label class="form-check-label" for="q4c">Реальні суспільні зміни та згуртування людей навколо важливої ідеї.</label>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Ситуація 5 -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark">5. Який формат роботи викликає у вас наибольше натхнення?</h5>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q5" value="ethno" id="q5a" required>
+                    <label class="form-check-label" for="q5a">Польові дослідження, кропітка робота з архівами, текстилем та артефактами.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q5" value="publisher" id="q5b">
+                    <label class="form-check-label" for="q5b">Редагування книг, підбір ілюстрацій, співпраця з авторами та художниками.</label>
+                </div>
+                <div class="form-check my-2">
+                    <input class="form-check-input" type="radio" name="q5" value="activist" id="q5c">
+                    <label class="form-check-label" for="q5c">Публічні виступи, публіцистика, участь у громадських об’єднаннях та форумах.</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill mt-3 shadow-sm">Визначити світоглядний тип ✨</button>
+        </form>
+
+        {% else %}
+        <!-- Результат -->
+        <div class="card shadow border-0 rounded-4 p-4 p-md-5 bg-white mb-5">
+            <span class="text-muted text-uppercase fw-bold small mb-1">Ваш результат квізу</span>
+            <h2 class="text-primary fw-bold mb-3">{{ result.title }}</h2>
+            <p class="fs-5 text-dark mb-4">{{ result.desc }}</p>
+
+            <div class="p-4 bg-light rounded-4 border-start border-4 border-primary shadow-sm mb-4">
+                <h6 class="fw-bold text-uppercase text-secondary mb-2" style="font-size: 0.85rem; letter-spacing: 0.5px;">Історико-біографічний контекст</h6>
+                <p class="mb-0 text-dark" style="line-height: 1.6;">{{ result.connection }}</p>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mt-2">
+                <a href="/mindset" class="btn btn-outline-primary rounded-pill px-4">Пройти знову 🔄</a>
+                <a href="/archive" class="btn btn-primary rounded-pill px-4">Дослідити архів творів 📚</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
