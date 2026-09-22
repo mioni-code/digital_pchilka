@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Pchilka — Платформа спадщини</title>
+    <!-- Підключаємо наш CSS файл через шаблонізатор Jinja2 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Digital Pchilka</h1>
+        <p>Інтерактивна платформа цифровізації та аналізу спадщини Олени Пчілки</p>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <h2>Вітаємо у цифровому хабі</h2>
+            <p>Проект покликаний переосмислити внесок Олени Пчілки як стратегічного архітектора української ідентичності, видавниці та педагога.</p>
+        </div>
+
+        <div class="grid-modules">
+            <div class="card">
+                <h3>Archive Explorer</h3>
+                <p>Електронний архів творів, публіцистики та епістолярію з системою фільтрації.</p>
+            </div>
+            <div class="card">
+                <h3>Mindset Explorer</h3>
+                <p>Інтерактивне психологічне тестування на основі виховної системи «Косачівської школи».</p>
+            </div>
+            <div class="card">
+                <h3>Карта зв'язків</h3>
+                <p>Візуалізація інтелектуального оточення та культурних контактів письменниці.</p>
+            </div>
+            <div class="card">
+                <h3>Етно-цифровізація</h3>
+                <p>Цифрова галерея автентичних узорів із праці «Українські народні узори».</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Випускний проект ЛІТ • Виконала Рябоконь Мілана</p>
+    </footer>
+
+</body>
+</html>
