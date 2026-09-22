@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive Explorer — Digital Pchilka</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Archive Explorer</h1>
+        <p>Цифровий архів творів, публіцистики та етнографії Олени Пчілки</p>
+        <p><a href="/" style="color: #ffcccc; text-decoration: none;">← На головну</a></p>
+    </header>
+
+    <div class="container">
+        <!-- Форма пошуку (працює без JavaScript!) -->
+        <form action="/archive" method="GET" style="margin-bottom: 30px; text-align: center;">
+            <input type="text" name="search" placeholder="Пошук творів за назвою або словом..." value="{{ search_query }}" style="padding: 12px; width: 60%; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
+            <button type="submit" style="padding: 12px 24px; background-color: #8b0000; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem;">Шукати</button>
+        </form>
+
+        <h2>Знайдені матеріали ({{ works|length }}):</h2>
+
+        <div class="grid-modules">
+            {% for work in works %}
+                <div class="card">
+                    <h3>{{ work.title }}</h3>
+                    <p><strong>Жанр:</strong> {{ work.genre }} | <strong>Рік:</strong> {{ work.year }}</p>
+                    <p>{{ work.text[:150] }}...</p>
+                </div>
+            {% else %}
+                <p>Творів за вашим запитом не знайдено.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <p>Digital Pchilka • Архівна система</p>
+    </footer>
+
+</body>
+</html>
