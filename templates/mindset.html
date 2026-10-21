@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <title>Світоглядний квіз — Digital Pchilka</title>
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Навігація по розділах -->
+    <p align="center">
+        <b>Навігація по розділах проєкту:</b><br>
+        <a href="/">Головна (index.html)</a> | 
+        <a href="/archive">Архів творів (archive.html)</a> | 
+        <a href="/mindset">Світоглядний квіз (mindset.html)</a>
+    </p>
+
+    <hr size="2" color="Maroon">
+
+    <!-- Заголовок сторінки -->
+    <h1 align="center"><font color="Maroon">Світоглядний квіз</font></h1>
+    <p align="center">
+        Дайте відповіді на 5 запитань, щоб дізнатися, який напрям діяльності Олени Пчілки вам найближчий.
+    </p>
+
+    <hr size="1" color="Gray">
+
+    {% if not result %}
+    {% if error %}<p align="center"><font color="Red"><b>{{ error }}</b></font></p>{% endif %}
+    
+    <!-- Форма з питаннями -->
+    <form method="POST" action="/mindset">
+        
+        <!-- Питання 1 -->
+        <p><b>1. Уявіть, що ви організовуєте власний культурний проєкт. З чого ви почнете?</b></p>
+        <p>
+            <input type="radio" name="q1" value="ethno" id="q1a" required>
+            <label for="q1a">Зі збору старовинних вишивок, обрядів та народних пісень.</label><br>
+            
+            <input type="radio" name="q1" value="publisher" id="q1b">
+            <label for="q1b">З видання дитячої книжки або журналу з малюнками.</label><br>
+            
+            <input type="radio" name="q1" value="activist" id="q1c">
+            <label for="q1c">З організації публічного виступу або статті у газеті на захист української мови.</label>
+        </p>
+
+        <hr size="1" color="LightGray">
+
+        <!-- Питання 2 -->
+        <p><b>2. Яка проблема у культурі здається вам найважливішою?</b></p>
+        <p>
+            <input type="radio" name="q2" value="ethno" id="q2a" required>
+            <label for="q2a">Забуття народних традицій та візерунків.</label><br>
+            
+            <input type="radio" name="q2" value="publisher" id="q2b">
+            <label for="q2b">Мало цікавих україномовних книжок для дітей.</label><br>
+            
+            <input type="radio" name="q2" value="activist" id="q2c">
+            <label for="q2c">Пасивність громадян та заборони рідного слова.</label>
+        </p>
+
+        <hr size="1" color="LightGray">
+
+        <!-- Питання 3 -->
+        <p><b>3. Як ви вважаєте, що найкраще зацікавить людей історією?</b></p>
+        <p>
+            <input type="radio" name="q3" value="ethno" id="q3a" required>
+            <label for="q3a">Детальна виставка зразків народного одягу та писанок.</label><br>
+            
+            <input type="radio" name="q3" value="publisher" id="q3b">
+            <label for="q3b">Яскраві казки, вірші та навчальні журнали.</label><br>
+            
+            <input type="radio" name="q3" value="activist" id="q3c">
+            <label for="q3c">Відкриті дискусії та громадські обговорення.</label>
+        </p>
+
+        <hr size="1" color="LightGray">
+
+        <!-- Питання 4 -->
+        <p><b>4. Що для вас є головним результатом вашої праці?</b></p>
+        <p>
+            <input type="radio" name="q4" value="ethno" id="q4a" required>
+            <label for="q4a">Збережена для нащадків народна культура.</label><br>
+            
+            <input type="radio" name="q4" value="publisher" id="q4b">
+            <label for="q4b">Діти, які люблять читати рідною мовою.</label><br>
+            
+            <input type="radio" name="q4" value="activist" id="q4c">
+            <label for="q4c">Зміни в суспільстві та згуртовані люди.</label>
+        </p>
+
+        <hr size="1" color="LightGray">
+
+        <!-- Питання 5 -->
+        <p><b>5. Який вид роботи вам найбільше до душі?</b></p>
+        <p>
+            <input type="radio" name="q5" value="ethno" id="q5a" required>
+            <label for="q5a">Дослідження старовинних речей та фольклору.</label><br>
+            
+            <input type="radio" name="q5" value="publisher" id="q5b">
+            <label for="q5b">Редагування текстів та підбір ілюстрацій до них.</label><br>
+            
+            <input type="radio" name="q5" value="activist" id="q5c">
+            <label for="q5c">Написання публіцистичних статей та виступи.</label>
+        </p>
+
+        <br>
+        <p align="center">
+            <input type="submit" value="Дізнатися результат">
+        </p>
+    </form>
+
+    {% else %}
+    <!-- Блок з результатом -->
+    <table border="1" width="100%" cellpadding="15" cellspacing="0">
+        <tr>
+            <td>
+                <h2><font color="DarkGreen">Ваш результат: {{ result.title }}</font></h2>
+                <p>{{ result.desc }}</p>
+
+                <hr size="1" color="Gray">
+
+                <p><b>Історичний факт про Олену Пчілку:</b></p>
+                <p><i>{{ result.connection }}</i></p>
+
+                <br>
+                <p>
+                    <a href="/mindset">Пройти квіз ще раз</a> | 
+                    <a href="/archive">Перейти до архіву творів</a>
+                </p>
+            </td>
+        </tr>
+    </table>
+    {% endif %}
+
+    <hr size="2" color="Maroon">
+
+    <p align="center">
+        <small>Авторські права: &copy; 2026 Digital Pchilka Project. Дніпровський науковий ліцей інформаційних технологій.</small>
+    </p>
+
+</body>
+</html>

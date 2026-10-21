@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <title>{{ work.title }} — Digital Pchilka</title>
+    <!-- Підключаємо наш спільний CSS-файл -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <p align="center">
+        <b>Навігація по розділах проєкту:</b><br>
+        <a href="/">Головна (index.html)</a> | 
+        <a href="/archive">Архів творів (archive.html)</a> | 
+        <a href="/mindset">Світоглядний квіз (mindset.html)</a>
+    </p>
+
+    <hr size="2" color="Maroon">
+
+    <!-- Заголовок твору та метадані -->
+    <h1 align="center"><font color="Maroon">{{ work.title }}</font></h1>
+    <p align="center">
+        <b>Жанр:</b> {{ work.genre }} | 
+        <b>Рік видання:</b> {{ work.year if work.year else 'невідомий' }}
+    </p>
+
+    <!-- Короткий опис / Анотація -->
+    {% if work.summary %}
+    <table border="1" width="100%" cellpadding="10" cellspacing="0">
+        <tr bgcolor="LightGray">
+            <td><b>Короткий зміст:</b> {{ work.summary }}</td>
+        </tr>
+    </table>
+    {% endif %}
+
+    <!-- Повний текст твору з розбиттям на абзаци -->
+    <h3><font color="Maroon">Текст твору:</font></h3>
+    {% for paragraph in work.text.split('\n') if paragraph.strip() %}
+        <p>{{ paragraph }}</p>
+    {% endfor %}
+
+    <hr size="1" color="Gray">
+
+    <!-- Перехід між сусідніми творами -->
+    <p align="center">
+        {% if prev_work %}
+            <a href="/work/{{ prev_work.id }}">&larr; {{ prev_work.title }}</a>
+        {% endif %}
+        
+        {% if prev_work and next_work %} | {% endif %}
+        
+        {% if next_work %}
+            <a href="/work/{{ next_work.id }}">{{ next_work.title }} &rarr;</a>
+        {% endif %}
+    </p>
+
+    <p align="center">
+        <a href="/archive">&larr; Повернутися до архіву творів</a>
+    </p>
+
+    <hr size="2" color="Maroon">
+
+    <!-- Підніжок сторінки -->
+    <p align="center">
+        <small>Авторські права: &copy; 2026 Digital Pchilka Project. Дніпровський науковий ліцей інформаційних технологій.</small>
+    </p>
+
+</body>
+</html>

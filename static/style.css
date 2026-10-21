@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: White;
+    color: Black;
+    line-height: 1.5;
+}
+
+/* Налаштування посилань */
+a {
+    color: Maroon;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: Black;
+}
+
+/* Стилі для заголовків */
+h1, h2, h3, h4 {
+    color: Maroon;
+}
+
+/* Поля для форм і кнопок */
+input[type="text"], select {
+    padding: 5px;
+    font-size: 14px;
+}
+
+input[type="submit"], button {
+    padding: 5px 15px;
+    background-color: Maroon;
+    color: White;
+    border: 1px solid Maroon;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+input[type="submit"]:hover, button:hover {
+    background-color: DarkRed;
+}
+
+/* Прості таблиці */
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+td, th {
+    padding: 8px;
+}

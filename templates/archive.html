@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <title>Архів творів — Digital Pchilka</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Навігаційне меню -->
+    <p align="center">
+        <b>Навігація по розділах проєкту:</b><br>
+        <a href="/">Головна (index.html)</a> | 
+        <a href="/archive">Архів творів (archive.html)</a> | 
+        <a href="/mindset">Світоглядний квіз (mindset.html)</a>
+    </p>
+
+    <hr size="2" color="Maroon">
+
+    <!-- Заголовок -->
+    <h1 align="center"><font color="Maroon">Архів творів Олени Пчілки</font></h1>
+    <p align="center">Електронний каталог літературної та етнографічної спадщини</p>
+
+    <!-- Пошукова форма -->
+    <div align="center">
+        <form action="/archive" method="GET">
+            <label for="search"><b>Пошук у каталозі:</b></label>
+            <input type="text" id="search" name="search" placeholder="Введіть назву або слово..." value="{{ search_query }}">
+            <br><br>
+            <label for="genre"><b>Жанр:</b></label>
+            <select id="genre" name="genre">
+                <option value="">усі</option>
+                {% for g in genres %}
+                    <option value="{{ g }}" {% if g == genre %}selected{% endif %}>{{ g }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="year"><b>Рік:</b></label>
+            <select id="year" name="year">
+                <option value="">усі</option>
+                {% for y in years %}
+                    <option value="{{ y }}" {% if y|string == year %}selected{% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+            
+            <input type="submit" value="Шукати">
+            <a href="/archive">Скинути</a>
+        </form>
+    </div>
+
+    <br>
+    <hr size="1" color="Gray">
+
+    <!-- Список знайдених творів -->
+    <h3>Знайдено творів у базі: {{ works|length }}</h3>
+
+    {% for work in works %}
+        <table border="1" width="100%" cellpadding="10" cellspacing="0" style="margin-bottom: 15px;">
+            <tr bgcolor="LightGray">
+                <td>
+                    <h4><a href="/work/{{ work.id }}"><font color="Maroon">{{ work.title }}</font></a></h4>
+                    <p>
+                        <b>Жанр:</b> {{ work.genre }} | 
+                        <b>Рік видання:</b> {{ work.year if work.year else 'невідомий' }}
+                    </p>
+                    <p>
+                        <b>Короткий зміст:</b> {{ work.summary if work.summary else work.text[:150] ~ '...' }}
+                    </p>
+                    <p><a href="/work/{{ work.id }}">Відкрити повністю &rarr;</a></p>
+                </td>
+            </tr>
+        </table>
+    {% else %}
+        <p><font color="Red">Творів за вашим запитом не знайдено.</font></p>
+    {% endfor %}
+
+    <hr size="2" color="Maroon">
+
+    <p align="center">
+        <small>Авторські права: &copy; 2026 Digital Pchilka Project. Дніпровський науковий ліцей інформаційних технологій.</small>
+    </p>
+
+</body>
+</html>
