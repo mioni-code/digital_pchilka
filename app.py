@@ -66,7 +66,7 @@ def archive():
         query = query.filter(Work.year == int(year))
     works = query.order_by(Work.year, Work.title).all()
 
-    # Пошук робимо в Pytho
+    # Пошук 
     if search_query:
         needle = search_query.casefold()
         works = [
@@ -82,12 +82,17 @@ def archive():
                            genre=genre, year=year, genres=genres, years=years)
 
 # 3. Детальна сторінка окремого твору
-@app.route('/work/<int:work_id>')
-def work_detail(work_id):
-    work = db.get_or_404(Work, work_id)
-    prev_work = Work.query.filter(Work.id < work_id).order_by(Work.id.desc()).first()
-    next_work = Work.query.filter(Work.id > work_id).order_by(Work.id).first()
-    return render_template('work_detail.html', work=work, prev_work=prev_work, next_work=next_work)
+@app.route('/work/<int:id>')
+def work_detail(id):
+    work = Work.query.get_or_404(id)
+    # Розбиваємо текст на абзаци 
+    paragraphs = work.text.split('\n\n') if work.text else []
+    
+    # Знаходимо попередній і наступний твори 
+    prev_work = Work.query.filter(Work.id < id).order_by(Work.id.desc()).first()
+    next_work = Work.query.filter(Work.id > id).order_by(Work.id.asc()).first()
+    
+    return render_template('work_detail.html', work=work, paragraphs=paragraphs, prev_work=prev_work, next_work=next_work)
 
 # 4. Світоглядний квіз
 @app.route('/mindset', methods=['GET', 'POST'])

@@ -3,6 +3,30 @@
 <head>
     <meta charset="utf-8">
     <title>Digital Pchilka — Головна сторінка</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        let currentSlide = 0;
+        const facts = [
+            "Походила зі старого роду Драгоманових, який давав початок видатним інтелектуалам епохи (її братом був Михайло Драгоманов).",
+            "Вона є матір'ю та головною наставницею Лесі Українки, створивши для дітей унікальну «Косачівську домашню школу».",
+            "У 1876 році видала фундаментальну працю «Український народний орнамент», яка довела самобутність української вишивки у Європі.",
+            "Ввела в активний словник української мови такі звичні нині слова, як «мистецтво» та «променистий»."
+        ];
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= facts.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = facts.length - 1;
+            document.getElementById('slider-text').innerText = facts[currentSlide];
+            document.getElementById('slide-counter').innerText = (currentSlide + 1) + " / " + facts.length;
+        }
+
+        setInterval(function() {
+            changeSlide(1);
+        }, 5000);
+    </script>
 </head>
 <body>
 
@@ -21,41 +45,101 @@
     <h3 align="center">Цифрова платформа для дослідження спадщини Олени Пчілки</h3>
 
     <p align="center">
-        <i>Випускний проєкт з інформатики • Виконала учениця ЛІТ Рябоконь Мілана</i>
+        <i>Випускний проєкт з інформатики та української літератури • Виконала учениця ДНЛІТ Рябоконь Мілана Іванівна</i>
     </p>
 
     <hr size="1" color="Gray">
 
-    <p>
-        Цей веб-сайт створено для систематизації та зручного перегляду творчого доробку української письменниці, видавниці та етнографині <b>Олени Пчілки</b> (Ольги Петрівни Косач).
-    </p>
+    <!-- Блок з портретом та біографічною довідкою з курсової роботи -->
+    <table border="0" width="100%" cellpadding="10">
+        <tr>
+            <td width="30%" align="center" valign="top">
+                <!-- Портрет Олени Пчілки з папки static/images -->
+                <img src="{{ url_for('static', filename='images/pchilka.jpg') }}" alt="Олена Пчілка" width="220" style="border: 1px solid Gray;">
+                <p><small><b>Олена Пчілка</b><br>(Ольга Драгоманова-Косач)<br>1849–1930</small></p>
+            </td>
+            <td width="70%" valign="top">
+                <h3><font color="Maroon">Дворянка за походженням та українка за духом</font></h3>
+                <p>
+                    Цей веб-сайт створено для систематизації та зручного перегляду творчого доробку української письменниці, видавниці та етнографині <b>Олени Пчілки</b> (Ольги Петрівни Косач). У її творчості поєдналися художнє слово, національна ідея, виховна місія та активна громадянська позиція.
+                </p>
 
-    <h2>Модулі сайту:</h2>
+                <!-- Слайдер цікавих фактів з біографії -->
+                <table border="1" width="100%" cellpadding="10" cellspacing="0" bgcolor="WhiteSmoke">
+                    <tr>
+                        <td align="center">
+                            <b>Цікаві факти з біографії (з курсової роботи):</b><br><br>
+                            <p id="slider-text" style="min-height: 45px;">
+                                Походила зі старого роду Драгоманових, який давав початок видатним інтелектуалам епохи (її братом був Михайло Драгоманов).
+                            </p>
+                            <table border="0" width="100%">
+                                <tr>
+                                    <td align="left"><button type="button" onclick="changeSlide(-1)">&larr; Попередній</button></td>
+                                    <td align="center"><small id="slide-counter">1 / 4</small></td>
+                                    <td align="right"><button type="button" onclick="changeSlide(1)">Наступний &rarr;</button></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 
-    <p>
-        <b>1. <a href="/archive"><font color="DarkGreen">Архів творів</font></a></b><br>
-        Електронний каталог з можливістю пошуку та фільтрації творів за жанрами та роками видання. Усі дані завантажуються з бази даних SQLite.
-    </p>
+    <hr size="1" color="Gray">
 
-    <p>
-        <b>2. <a href="/mindset"><font color="DarkGreen">Світоглядний квіз</font></a></b><br>
-        Інтерактивний освітній квіз із 5 запитань, який визначає близький користувачеві напрям діяльності письменниці (етнографія, видавнича справа чи громадська діяльність).
-    </p>
+    <!-- Навігаційні картки модулів сайту -->
+    <h2><font color="Maroon">Основні модулі сайту:</font></h2>
 
-    <p>
-        <b>3. Карта зв'язків (у розробці)</b><br>
-        Візуалізація оточення Олени Пчілки та її культурно-просвітницьких контактів.
-    </p>
+    <table border="1" width="100%" cellpadding="12" cellspacing="0">
+        <tr bgcolor="LightGray">
+            <td width="50%" valign="top">
+                <h4>1. <a href="/archive"><font color="DarkGreen">Архів творів</font></a></h4>
+                <p>Електронний каталог із системою пошуку та фільтрації за жанрами й роками видання. Містить повні тексти казок, оповідок та збірок, завантажених із бази даних SQLite.</p>
+                <p><a href="/archive">Перейти до каталогу &rarr;</a></p>
+            </td>
+            <td width="50%" valign="top">
+                <h4>2. <a href="/mindset"><font color="DarkGreen">Світоглядний квіз</font></a></h4>
+                <p>Інтерактивний освітній модуль із 5 запитань, який визначає близький користувачеві напрям діяльності письменниці (етнографія, видавництво чи громадська позиція).</p>
+                <p><a href="/mindset">Пройти квіз &rarr;</a></p>
+            </td>
+        </tr>
+        <tr bgcolor="WhiteSmoke">
+            <td width="50%" valign="top">
+                <h4>3. <font color="Gray">Карта зв'язків (у розробці)</font></h4>
+                <p>Візуалізація оточення Олени Пчілки та її культурно-просвітницьких контактів із провідними діячами епохи.</p>
+                <p><i>у розробці</i></p>
+            </td>
+            <td width="50%" valign="top">
+                <h4>4. <font color="Gray">Етно-галерея (у розробці)</font></h4>
+                <p>Оцифровані зразки автентичних орнаментів із фундаментальної праці «Український народний орнамент» (1876 р.).</p>
+                <p><i>у розробці</i></p>
+            </td>
+        </tr>
+    </table>
 
-    <p>
-        <b>4. Етно-галерея (у розробці)</b><br>
-        Оцифровані зразки орнаментів із праці «Український народний орнамент» (1876 р.).
-    </p>
+    <br>
+
+    <!-- Відео з YouTube + авторства -->
+    <table border="1" width="100%" cellpadding="15" cellspacing="0">
+        <tr bgcolor="LightGray">
+            <td align="center">
+                <h3><font color="Maroon">Відеоматеріал до теми: «Неймовірні українки: Олена Пчілка»</font></h3>
+                <p><i>Документальний огляд життєвого шляху, просвітницької та видавничої діяльності письменниці.</i></p>
+                <br>
+                <!-- Вбудоване відео з YouTube -->
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/oagDa6sZ-jE" title="Неймовірні українки: Олена Пчілка" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <br><br>
+                <p><small><b>Джерело / Офіційний електронний ресурс:</b> Проєкт «ЗОЛОЧІВ.НЕТ» — Відеозапис «Неймовірні українки: Олена Пчілка». Доступно за посиланням: <a href="https://youtu.be/oagDa6sZ-jE" target="_blank">https://youtu.be/oagDa6sZ-jE</a> (дата звернення: 17.11.2026 р.).</small></p>
+            </td>
+        </tr>
+    </table>
 
     <hr size="2" color="Maroon">
 
+    <!-- Підніжок сторінки -->
     <p align="center">
-        <small>Авторські права: &copy; 2026 Digital Pchilka Project. Дніпровський науковий ліцей інформаційних технологій.</small>
+        <small> 2026 Digital Pchilka Project. Дніпровський науковий ліцей інформаційних технологій.</small>
     </p>
 
 </body>
